@@ -10,9 +10,9 @@ task will be to setup the project and extend it!
 
 The app consists of two TypeScript bundles, bundled by Vite; one for
 the navigation and one for the dashboard. You can consider this as a
-representation of the "microfrontends" pattern, and it exists like this
+representation of the "micro-frontends" pattern, and it exists like this
 because our actual app is undergoing a transition from an MPA to an SPA
-so dealing with these issues is a daily requirement in the job.
+and so dealing with these issues is a real-life scenario at YunoJuno.
 
 ### 📈 Goals
 
@@ -26,15 +26,14 @@ Because of the micro-frontends pattern, there are two Redux stores - one for
 the dashboard and one for the navigation. Both apps contain a component which
 allows a freelancer to change their availability.
 
-Your job is to introduce a performant, scaleable way to ensure the state is
+Your job is to introduce a performant, scale-able way to ensure the state is
 kept in sync between both components. When a freelancer's availability is
 updated in one, it should be reflected in the other immediately.
 
-Think about:
+You should think about:
 
 - performance
 - having a repeatable pattern that we could use elsewhere and apply easily
-- only sharing the state you need to share
 
 **Improve the usability/design of the dashboard availability component**
 
@@ -43,14 +42,14 @@ Freelancers can update their availability via the dashboard component.
 It works fine, we guess - but it looks a bit strange and the fact it works
 via an unstyled select drop-down feels a bit 1996.
 
-We'd like you to apply your own flair to this component and rethink how it
-works.
+We'd like you to apply your own flair to this component and rethink how
+a freelancer would interact with it.
 
 **Fix the navigation's availability update component**
 
 A freelancer is meant to be able to update their availability from any page on
-FreelancerHub but currently when they click input the update component does not
-show correctly.
+FreelancerHub by using the component in the navigation but currently when they
+click the availability selection we are told that it does not show correctly.
 
 Simply fix it, so that it works.
 
