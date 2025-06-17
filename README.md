@@ -27,12 +27,12 @@ the dashboard and one for the navigation. Both apps contain a component which
 allows a freelancer to change their availability.
 
 Your job is to introduce a performant, scale-able way to ensure the state is
-kept in sync between both components. When a freelancer's availability is
-updated in one, it should be reflected in the other immediately.
+kept in sync between both stores. When a freelancer's availability is
+updated in one component, it should be reflected in the other immediately.
 
 You should think about:
 
-- performance
+- performance ("how would this pattern scale across stores?")
 - having a repeatable pattern that we could use elsewhere and apply easily
 
 **Improve the usability/design of the dashboard availability component**
