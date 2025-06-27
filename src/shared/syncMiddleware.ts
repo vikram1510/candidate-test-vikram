@@ -6,8 +6,8 @@ export const createSyncMiddleware = (source: EventSource): Middleware => {
   return _ => next => action => {
     const result = next(action);
 
-    // Check if this is a work status update action
-    if (action.type.endsWith("/updateWorkStatus")) {
+    // Only dispatch events for actions that originated from user interaction (not from sync)
+    if (action.type.endsWith("/updateWorkStatus") && !action.meta?.fromSync) {
       dispatchWorkStatusChanged(action.payload, source);
     }
 
