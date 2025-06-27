@@ -22,7 +22,7 @@ export const UserAvatar = () => {
 
   return (
     <div
-      className="relative focus:outline-none"
+      className="relative"
       tabIndex={0}
       onBlur={() => setDropdownOpen(false)}
     >
