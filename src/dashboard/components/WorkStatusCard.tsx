@@ -13,9 +13,11 @@ export const WorkStatusCard = ({ className = "" }: { className?: string }) => {
     not_looking: "Don't want to hear about work",
   };
 
-  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(updateWorkStatus(e.target.value as WorkStatus));
+  const handleStatusChange = (status: WorkStatus) => {
+    dispatch(updateWorkStatus(status));
   };
+
+  const statuses: WorkStatus[] = ["looking", "passive", "not_looking"];
 
   return (
     <div className={`bg-white rounded-lg shadow-sm p-6 h-full ${className}`}>
@@ -23,20 +25,33 @@ export const WorkStatusCard = ({ className = "" }: { className?: string }) => {
         Your Work Status
       </h3>
       <div className="py-2">
-        <p>Update your availability for new opportunities:</p>
-        <select
-          value={profile.workStatus}
-          onChange={handleStatusChange}
-          className="w-full p-3 border border-gray-200 rounded-md my-4 text-base"
-        >
-          <option value="looking">Currently looking for work</option>
-          <option value="passive">Passively looking for work</option>
-          <option value="not_looking">Don't want to hear about work</option>
-        </select>
-        <p className="mt-4 text-gray-500">
-          Your current status:{" "}
-          <strong>{statusLabels[profile.workStatus]}</strong>
-        </p>
+        <p className="mb-4">Update your availability for new opportunities:</p>
+        
+        <div className="flex flex-col gap-3">
+          {statuses.map((status) => (
+            <label
+              key={status}
+              className={`
+                px-4 py-3 rounded-full cursor-pointer transition-all text-sm font-medium text-center
+                ${profile.workStatus === status
+                  ? 'bg-blue-500 text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }
+              `}
+              onClick={() => handleStatusChange(status)}
+            >
+              <input
+                type="radio"
+                name="workStatus"
+                value={status}
+                checked={profile.workStatus === status}
+                onChange={() => handleStatusChange(status)}
+                className="sr-only"
+              />
+              {statusLabels[status]}
+            </label>
+          ))}
+        </div>
       </div>
     </div>
   );
