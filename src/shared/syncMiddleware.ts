@@ -1,16 +1,17 @@
-import { Middleware } from "@reduxjs/toolkit";
+import { createListenerMiddleware } from "@reduxjs/toolkit";
 import { dispatchWorkStatusChanged, EventSource } from "./events";
 
-// Middleware to dispatch events when work status is updated
-export const createSyncMiddleware = (source: EventSource): Middleware => {
-  return _ => next => action => {
-    const result = next(action);
+// Create listener middleware to dispatch events when work status is updated
+export const createSyncMiddleware = (source: EventSource) => {
+  const listenerMiddleware = createListenerMiddleware();
 
-    // Only dispatch events for actions that originated from user interaction (not from sync)
-    if (action.type.endsWith("/updateWorkStatus") && !action.meta?.fromSync) {
+  listenerMiddleware.startListening({
+    matcher: (action) => 
+      action.type.endsWith("/updateWorkStatus") && !action.meta?.fromSync,
+    effect: (action) => {
       dispatchWorkStatusChanged(action.payload, source);
-    }
+    },
+  });
 
-    return result;
-  };
+  return listenerMiddleware.middleware;
 };
